@@ -1,0 +1,27 @@
+.board {
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+    background-color: #bbada0;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 25%;
+  }
+  
+  .cell {
+    width: 22%;
+    height: 100%;
+    background-color: #cdc1b4;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

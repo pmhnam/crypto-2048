@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2048</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        updateBoard();
+      });
+
+      async function move(direction) {
+        const result = await $.post('/move', { direction: direction });
+        console.log("move", result);
+        if (result.status) {
+          updateBoard();
+        }
+      }
+
+      async function updateBoard() {
+        const board = await $.get('/board');
+        const score = 0
+        console.log("updateBoard", board);
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            const value = board[i][j];
+            $(`#cell-${i}-${j}`).text(value);
+          }
+        }
+        $('#score').text(score);
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="cell-0-0"></td>
+        <td id="cell-0-1"></td>
+        <td id="cell-0-2"></td>
+        <td id="cell-0-3"></td>
+      </tr>
+      <tr>
+        <td id="cell-1-0"></td>
+        <td id="cell-1-1"></td>
+        <td id="cell-1-2"></td>
+        <td id="cell-1-3"></td>
+      </tr>
+      <tr>
+        <td id="cell-2-0"></td>
+        <td id="cell-2-1"></td>
+        <td id="cell-2-2"></td>
+        <td id="cell-2-3"></td>
+      </tr>
+      <tr>
+        <td id="cell-3-0"></td>
+        <td id="cell-3-1"></td>
+        <td id="cell-3-2"></td>
+        <td id="cell-3-3"></td>
+      </tr>
+    </table>
+    <div>Score: <span id="score"></span></div>
+    <button onclick="move('moveLeft')">Left</button>
+    <button onclick="move('moveRight')">Right</button>
+    <button onclick="move('moveUp')">Up</button>
+    <button onclick="move('moveDown')">Down</button>
+  </body>
+</html>
